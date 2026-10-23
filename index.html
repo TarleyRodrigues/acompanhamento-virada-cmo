@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Acompanhamento da Virada</title>
+<style>
+  :root {
+    --bg: #F4F5FA; --panel: #FFFFFF; --ink: #1B1D33; --muted: #5B5F7A; --line: #E3E5EF;
+    --navy: #0E1040; --accent: #6A0F8E; --pink: #E8005A; --blue: #1426B8;
+    --ok: #0F8A5F; --ok-bg: #E9F7F1; --warn: #B4540A; --warn-bg: #FFF5E8; --bad: #B0003F; --bad-bg: #FDE8EF;
+    --info-bg: #EEF1FF; --field: #FAFAFD; --title: #0E1040;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F1020; --panel: #181A2E; --ink: #E8E9F5; --muted: #A2A5C4; --line: #2C2F4A; --title: #C9CCF2;
+      --info-bg: #1E2240; --ok-bg: #12332A; --warn-bg: #3A2A14; --bad-bg: #3A1424; --field: #12142A;
+      --ok: #4FD1A0; --warn: #F2A65A; --bad: #FF6B9A; --blue: #8FA0FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1020; --panel: #181A2E; --ink: #E8E9F5; --muted: #A2A5C4; --line: #2C2F4A; --title: #C9CCF2;
+    --info-bg: #1E2240; --ok-bg: #12332A; --warn-bg: #3A2A14; --bad-bg: #3A1424; --field: #12142A;
+    --ok: #4FD1A0; --warn: #F2A65A; --bad: #FF6B9A; --blue: #8FA0FF;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 "Segoe UI", Roboto, Arial, sans-serif; }
+  header { background: #0E1040; color: #fff; padding: 26px 16px 70px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  header .top { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+  header .tag { display: inline-block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.3); padding: 3px 10px; border-radius: 99px; }
+  header h1 { margin: 10px 0 4px; font-size: 26px; line-height: 1.2; }
+  header .sub { color: #C9CCF2; font-size: 14px; }
+  header .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hbtn { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.25); border-radius: 8px; padding: 7px 12px; cursor: pointer; font: inherit; font-size: 13px; }
+  .hbtn.on { background: #E8005A; border-color: #E8005A; }
+  .summary { margin-top: -50px; }
+  .sumcard { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 16px; align-items: center; box-shadow: 0 8px 24px rgba(14,16,64,.08); }
+  .big { font-size: 34px; font-weight: 750; color: var(--title); line-height: 1; }
+  .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+  .pbar { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .pbar i { display: block; height: 100%; background: linear-gradient(90deg, #1426B8, #6A0F8E, #E8005A); }
+  .stat { border-left: 1px solid var(--line); padding-left: 16px; }
+  .stat b { font-size: 24px; display: block; line-height: 1.1; }
+  .meta { font-size: 13px; color: var(--muted); margin: 10px 2px 0; display: flex; gap: 14px; flex-wrap: wrap; }
+  .layout { display: grid; grid-template-columns: 1fr 330px; gap: 20px; margin: 22px auto 60px; }
+  .grp-title { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin: 6px 2px 10px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 18px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .card .ch { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; }
+  .card h3 { margin: 0; font-size: 16px; color: var(--title); line-height: 1.3; }
+  .card .resp { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .card .desc { font-size: 13px; color: var(--muted); margin: 8px 0 6px; }
+  .card .prog { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin: 6px 0 4px; }
+  .card .prog .pbar { flex: 1; margin: 0; height: 6px; }
+  .card .prog .pbar i { background: var(--ok); }
+  ul.items { list-style: none; margin: 6px 0 0; padding: 0; }
+  ul.items li { display: flex; gap: 9px; align-items: flex-start; padding: 6px 0; border-top: 1px dashed var(--line); font-size: 14px; }
+  ul.items input[type=checkbox] { width: 17px; height: 17px; margin-top: 3px; accent-color: var(--ok); flex: none; }
+  ul.items li.done .t { color: var(--muted); text-decoration: line-through; }
+  ul.items .t { flex: 1; }
+  ul.items .ic { visibility: hidden; display: flex; gap: 2px; }
+  body.edit ul.items .ic { visibility: visible; }
+  .icb { border: 0; background: none; cursor: pointer; color: var(--muted); font-size: 14px; padding: 0 3px; }
+  .icb:hover { color: var(--pink); }
+  .add { display: none; gap: 6px; margin-top: 8px; }
+  body.edit .add { display: flex; }
+  .add input { flex: 1; }
+  input, select, textarea { font: inherit; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px; }
+  .btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 8px; padding: 5px 12px; cursor: pointer; font: inherit; font-size: 13px; }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 99px; white-space: nowrap; }
+  .s-feito { background: var(--ok-bg); color: var(--ok); } .s-andamento { background: var(--warn-bg); color: var(--warn); }
+  .s-aguardando { background: var(--info-bg); color: var(--blue); } .s-pendente { background: var(--bad-bg); color: var(--bad); } .s-na { background: var(--line); color: var(--muted); }
+  .only-edit { display: none !important; } body.edit .only-edit { display: inline-flex !important; } body.edit .only-view { display: none !important; }
+  aside .card { position: sticky; top: 16px; }
+  aside h2 { margin: 0 0 10px; font-size: 15px; color: var(--title); text-transform: uppercase; letter-spacing: .06em; }
+  .tl { list-style: none; margin: 0; padding: 0; max-height: 70vh; overflow: auto; }
+  .tl li { padding: 9px 0 9px 14px; border-left: 2px solid var(--line); position: relative; font-size: 13.5px; }
+  .tl li::before { content: ""; position: absolute; left: -6px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  .tl time { display: block; font-size: 11.5px; color: var(--muted); }
+  .tl .del { float: right; }
+  .newnote { display: none; gap: 6px; margin-bottom: 12px; flex-direction: column; }
+  body.edit .newnote { display: flex; }
+  .banner { display: none; background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn); border-radius: 10px; padding: 10px 14px; margin: 14px 0 0; font-size: 14px; }
+  .banner.on { display: block; }
+  .saving { font-size: 12px; }
+  dialog { border: 1px solid var(--line); border-radius: 14px; padding: 20px; max-width: 520px; width: calc(100% - 32px); background: var(--panel); color: var(--ink); }
+  dialog::backdrop { background: rgba(10,10,30,.55); }
+  dialog h3 { margin-top: 0; color: var(--title); }
+  dialog input { width: 100%; margin: 8px 0 12px; }
+  dialog p { font-size: 13.5px; color: var(--muted); }
+  footer { text-align: center; font-size: 12px; color: var(--muted); padding: 0 16px 30px; }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sumcard { grid-template-columns: 1fr 1fr; }
+    .stat { border-left: 0; padding-left: 0; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div>
+      <span class="tag">Acompanhamento · Synthexa</span>
+      <h1 id="titulo">Carregando…</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <div class="acts">
+      <button class="hbtn" id="btnRefresh">↻ Atualizar</button>
+      <button class="hbtn" id="btnTheme">◐ Tema</button>
+      <button class="hbtn" id="btnEdit">✎ Modo edição</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap summary">
+  <div class="sumcard" id="sum"></div>
+  <div class="meta" id="meta"></div>
+  <div class="banner" id="banner"></div>
+</div>
+
+<div class="wrap layout">
+  <main id="frentes"></main>
+  <aside>
+    <div class="card">
+      <h2>Linha do tempo</h2>
+      <div class="newnote">
+        <textarea id="noteText" rows="3" placeholder="Registrar uma atualização…"></textarea>
+        <button class="btn primary" id="btnNote">Registrar atualização</button>
+      </div>
+      <ul class="tl" id="tl"></ul>
+    </div>
+  </aside>
+</div>
+<footer>Synthexa | Governança, Integração e Sustentação Tecnológica</footer>
+
+<dialog id="dlg">
+  <h3>Modo edição</h3>
+  <p>Cole o token do GitHub com permissão de escrita (<b>Contents: Read and write</b>) neste repositório. Ele fica salvo só neste navegador.</p>
+  <input type="password" id="tokenIn" placeholder="github_pat_…" autocomplete="off">
+  <div style="display:flex;gap:8px;justify-content:flex-end">
+    <button class="btn" id="dlgCancel">Cancelar</button>
+    <button class="btn primary" id="dlgOk">Entrar</button>
+  </div>
+</dialog>
+
+<script>
+/* ============ CONFIGURAÇÃO DO REPOSITÓRIO ============ */
+const OWNER = "TarleyRodrigues";
+const REPO = "acompanhamento-virada-cmo";
+const FILE = "data.json";
+const BRANCH = "main";
+/* ===================================================== */
+
+const API = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/contents/" + FILE;
+const STATUS = { pendente: "🔴 Pendente", andamento: "🟡 Em andamento", aguardando: "🔵 Aguardando terceiro", feito: "✅ Concluído", na: "⚪ Não se aplica" };
+const TK = "acomp-virada-token";
+let D = null, sha = null, token = null, dirty = false, saveTimer = null, saving = false, pendingLogs = [];
+
+try { token = localStorage.getItem(TK); } catch (e) {}
+try { const th = localStorage.getItem("acomp-virada-theme"); if (th) document.documentElement.dataset.theme = th; } catch (e) {}
+
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const b64dec = (b) => new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g, "")), (c) => c.charCodeAt(0)));
+const b64enc = (s) => { const by = new TextEncoder().encode(s); let bin = ""; by.forEach((x) => (bin += String.fromCharCode(x))); return btoa(bin); };
+const nowIso = () => { const d = new Date(), o = -d.getTimezoneOffset(), p = (n) => String(Math.abs(n)).padStart(2, "0");
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + "T" + p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds()) + (o >= 0 ? "+" : "-") + p(Math.trunc(o / 60)) + ":" + p(o % 60); };
+const fmt = (iso) => { try { return new Date(iso).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); } catch (e) { return iso; } };
+const uid = () => Math.random().toString(36).slice(2, 9);
+
+function banner(msg) { const b = document.getElementById("banner"); b.textContent = msg || ""; b.classList.toggle("on", !!msg); }
+function headers() { const h = { Accept: "application/vnd.github+json" }; if (token) h.Authorization = "Bearer " + token; return h; }
+
+async function load() {
+  try {
+    const r = await fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers(), cache: "no-store" });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const j = await r.json(); sha = j.sha; D = JSON.parse(b64dec(j.content)); banner("");
+  } catch (e) {
+    try { const r2 = await fetch("data.json?t=" + Date.now(), { cache: "no-store" }); D = await r2.json(); sha = null;
+      banner("Exibindo a cópia publicada da página (pode ter alguns minutos de atraso).");
+    } catch (e2) { banner("Não foi possível carregar os dados. Tente novamente em instantes."); return; }
+  }
+  render();
+}
+
+async function save() {
+  if (!token || saving) return;
+  saving = true; setSaving("Salvando…");
+  const logs = pendingLogs.splice(0);
+  try {
+    const cur = await fetch(API + "?ref=" + BRANCH + "&t=" + Date.now(), { headers: headers(), cache: "no-store" });
+    if (cur.ok) sha = (await cur.json()).sha;
+    D.atualizadoEm = nowIso();
+    const r = await fetch(API, { method: "PUT", headers: Object.assign({ "Content-Type": "application/json" }, headers()),
+      body: JSON.stringify({ message: logs.length ? "Atualização: " + logs.join("; ").slice(0, 120) : "Atualização do acompanhamento", content: b64enc(JSON.stringify(D, null, 2) + "\n"), sha, branch: BRANCH }) });
+    if (!r.ok) throw new Error((await r.json()).message || r.status);
+    sha = (await r.json()).content.sha; dirty = false; setSaving("✓ Salvo " + fmt(D.atualizadoEm));
+  } catch (e) {
+    dirty = true; setSaving("⚠ Erro ao salvar: " + e.message); pendingLogs.unshift(...logs);
+  } finally { saving = false; renderMeta(); }
+}
+function schedule(log) {
+  if (log) { pendingLogs.push(log); D.atualizacoes.unshift({ em: nowIso(), texto: log, auto: true }); }
+  dirty = true; setSaving("Alterações pendentes…"); clearTimeout(saveTimer); saveTimer = setTimeout(save, 1200); render();
+}
+function setSaving(t) { const el = document.getElementById("savingTxt"); if (el) el.textContent = t; window._savingTxt = t; }
+
+function F(id) { return D.frentes.find((f) => f.id === id); }
+
+function renderSummary() {
+  const all = D.frentes.flatMap((f) => f.itens), done = all.filter((i) => i.feito).length, pct = all.length ? Math.round(100 * done / all.length) : 0;
+  const c = (s) => D.frentes.filter((f) => f.status === s).length;
+  document.getElementById("sum").innerHTML =
+    '<div><div class="lbl">Progresso geral</div><div class="big">' + pct + '%</div><div class="pbar"><i style="width:' + pct + '%"></i></div><div style="font-size:12px;color:var(--muted);margin-top:4px">' + done + " de " + all.length + " itens concluídos</div></div>" +
+    '<div class="stat"><b style="color:var(--ok)">' + c("feito") + '</b><span class="lbl">Concluídas</span></div>' +
+    '<div class="stat"><b style="color:var(--warn)">' + c("andamento") + '</b><span class="lbl">Em andamento</span></div>' +
+    '<div class="stat"><b style="color:var(--blue)">' + c("aguardando") + '</b><span class="lbl">Aguardando terceiro</span></div>' +
+    '<div class="stat"><b style="color:var(--bad)">' + c("pendente") + '</b><span class="lbl">Pendentes</span></div>';
+}
+function renderMeta() {
+  document.getElementById("meta").innerHTML = "<span>🗓 Virada: <b>" + esc(D.dataVirada) + "</b></span><span>🕒 Última atualização: <b>" + fmt(D.atualizadoEm) + "</b></span>" +
+    (token ? '<span class="saving" id="savingTxt">' + esc(window._savingTxt || "Modo edição ativo") + "</span>" : "");
+}
+
+function renderFrentes() {
+  const groups = [...new Set(D.frentes.map((f) => f.grupo))];
+  let html = "";
+  groups.forEach((g) => {
+    html += '<div class="grp-title">' + esc(g) + '</div><div class="grid">';
+    D.frentes.filter((f) => f.grupo === g).forEach((f) => {
+      const done = f.itens.filter((i) => i.feito).length, pct = f.itens.length ? Math.round(100 * done / f.itens.length) : 0;
+      html += '<div class="card"><div class="ch"><div><h3>' + esc(f.nome) + '</h3><div class="resp">' + esc(f.responsavel) + "</div></div>" +
+        '<span class="pill s-' + f.status + ' only-view">' + STATUS[f.status] + "</span>" +
+        '<select class="only-edit" data-st="' + f.id + '">' + Object.entries(STATUS).map(([k, v]) => '<option value="' + k + '"' + (k === f.status ? " selected" : "") + ">" + v + "</option>").join("") + "</select></div>" +
+        (f.descricao ? '<div class="desc">' + esc(f.descricao) + "</div>" : "") +
+        '<div class="prog"><div class="pbar"><i style="width:' + pct + '%"></i></div>' + done + "/" + f.itens.length + "</div>" +
+        '<ul class="items">' + f.itens.map((i) => '<li class="' + (i.feito ? "done" : "") + '"><input type="checkbox" data-ck="' + f.id + "|" + i.id + '"' + (i.feito ? " checked" : "") + (token ? "" : " disabled") + '><span class="t">' + esc(i.texto) +
+          (i.feitoEm ? ' <span style="font-size:11px;color:var(--muted)">(' + fmt(i.feitoEm) + ")</span>" : "") + '</span><span class="ic"><button class="icb" title="Editar" data-ed="' + f.id + "|" + i.id + '">✎</button><button class="icb" title="Excluir" data-rm="' + f.id + "|" + i.id + '">✕</button></span></li>').join("") + "</ul>" +
+        '<div class="add"><input placeholder="Novo item do checklist…" data-addin="' + f.id + '"><button class="btn" data-add="' + f.id + '">Adicionar</button></div>' +
+        '<div class="only-edit" style="gap:6px;margin-top:8px"><button class="btn" data-edf="' + f.id + '">Editar frente</button><button class="btn" data-rmf="' + f.id + '">Excluir frente</button></div></div>';
+    });
+    html += "</div>";
+  });
+  html += '<div class="only-edit" style="margin-bottom:20px"><button class="btn primary" id="btnNewF">+ Nova frente</button></div>';
+  document.getElementById("frentes").innerHTML = html;
+}
+function renderTimeline() {
+  document.getElementById("tl").innerHTML = D.atualizacoes.map((a, idx) => "<li>" + (token ? '<button class="icb del" title="Excluir" data-rmn="' + idx + '">✕</button>' : "") + "<time>" + fmt(a.em) + "</time>" + esc(a.texto) + "</li>").join("") || '<li>Nenhuma atualização ainda.</li>';
+}
+function render() {
+  if (!D) return;
+  document.body.classList.toggle("edit", !!token);
+  document.getElementById("btnEdit").textContent = token ? "✓ Editando (sair)" : "✎ Modo edição";
+  document.getElementById("btnEdit").classList.toggle("on", !!token);
+  document.getElementById("titulo").textContent = D.titulo;
+  document.getElementById("sub").textContent = D.cliente;
+  renderSummary(); renderMeta(); renderFrentes(); renderTimeline();
+}
+
+/* ============ EVENTOS ============ */
+document.addEventListener("change", (e) => {
+  const t = e.target; if (!token) return;
+  if (t.dataset.ck) { const [fid, iid] = t.dataset.ck.split("|"), f = F(fid), i = f.itens.find((x) => x.id === iid);
+    i.feito = t.checked; i.feitoEm = t.checked ? nowIso() : undefined;
+    schedule(t.checked ? "✓ " + i.texto + " (" + f.nome + ")" : null); }
+  if (t.dataset.st) { const f = F(t.dataset.st); f.status = t.value; schedule(f.nome + ": " + STATUS[t.value].replace(/^\S+\s/, "")); }
+});
+document.addEventListener("click", (e) => {
+  const t = e.target; if (!token && !t.closest("#btnEdit,#btnRefresh,#btnTheme")) return;
+  if (t.dataset.add) { const inp = document.querySelector('[data-addin="' + t.dataset.add + '"]'), v = inp.value.trim(); if (!v) return;
+    F(t.dataset.add).itens.push({ id: uid(), texto: v, feito: false }); schedule(null); }
+  if (t.dataset.ed) { const [fid, iid] = t.dataset.ed.split("|"), i = F(fid).itens.find((x) => x.id === iid), v = prompt("Editar item:", i.texto);
+    if (v && v.trim()) { i.texto = v.trim(); schedule(null); } }
+  if (t.dataset.rm) { const [fid, iid] = t.dataset.rm.split("|"), f = F(fid);
+    if (confirm("Excluir este item?")) { f.itens = f.itens.filter((x) => x.id !== iid); schedule(null); } }
+  if (t.dataset.edf) { const f = F(t.dataset.edf);
+    const n = prompt("Nome da frente:", f.nome); if (n === null) return;
+    const r = prompt("Responsável:", f.responsavel); if (r === null) return;
+    const d = prompt("Descrição:", f.descricao || ""); if (d === null) return;
+    const g = prompt("Grupo (ex.: Infraestrutura, Integrações, CMO Construtora):", f.grupo); if (g === null) return;
+    Object.assign(f, { nome: n.trim() || f.nome, responsavel: r.trim(), descricao: d.trim(), grupo: g.trim() || f.grupo }); schedule(null); }
+  if (t.dataset.rmf) { const f = F(t.dataset.rmf); if (confirm('Excluir a frente "' + f.nome + '" e todos os itens?')) { D.frentes = D.frentes.filter((x) => x !== f); schedule(null); } }
+  if (t.id === "btnNewF") { const n = prompt("Nome da nova frente:"); if (!n || !n.trim()) return;
+    const g = prompt("Grupo (ex.: Infraestrutura, Integrações, CMO Construtora):", "Integrações") || "Outros";
+    D.frentes.push({ id: uid(), nome: n.trim(), grupo: g.trim(), responsavel: "Synthexa", status: "pendente", descricao: "", itens: [] }); schedule("Nova frente: " + n.trim()); }
+  if (t.dataset.rmn !== undefined) { if (confirm("Excluir esta atualização da linha do tempo?")) { D.atualizacoes.splice(+t.dataset.rmn, 1); schedule(null); } }
+  if (t.id === "btnNote") { const v = document.getElementById("noteText").value.trim(); if (!v) return;
+    D.atualizacoes.unshift({ em: nowIso(), texto: v }); pendingLogs.push(v); document.getElementById("noteText").value = ""; schedule(null); }
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.dataset && e.target.dataset.addin) document.querySelector('[data-add="' + e.target.dataset.addin + '"]').click(); });
+
+document.getElementById("btnRefresh").onclick = () => { if (dirty) return alert("Aguarde o salvamento terminar."); load(); };
+document.getElementById("btnTheme").onclick = () => {
+  const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark"; try { localStorage.setItem("acomp-virada-theme", r.dataset.theme); } catch (e) {}
+};
+const dlg = document.getElementById("dlg");
+document.getElementById("btnEdit").onclick = () => {
+  if (token) { if (confirm("Sair do modo edição e apagar o token deste navegador?")) { token = null; try { localStorage.removeItem(TK); } catch (e) {} render(); } return; }
+  dlg.showModal();
+};
+document.getElementById("dlgCancel").onclick = () => dlg.close();
+document.getElementById("dlgOk").onclick = async () => {
+  const v = document.getElementById("tokenIn").value.trim(); if (!v) return;
+  const r = await fetch("https://api.github.com/repos/" + OWNER + "/" + REPO, { headers: { Accept: "application/vnd.github+json", Authorization: "Bearer " + v } });
+  const j = r.ok ? await r.json() : null;
+  if (!j || !(j.permissions && j.permissions.push)) { alert("Token inválido ou sem permissão de escrita neste repositório."); return; }
+  token = v; try { localStorage.setItem(TK, v); } catch (e) {} dlg.close(); load();
+};
+window.addEventListener("beforeunload", (e) => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+setInterval(() => { if (!token && !document.hidden) load(); }, 180000);
+
+load();
+</script>
+</body>
+</html>
