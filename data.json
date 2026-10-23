@@ -2,7 +2,7 @@
   "titulo": "Migração MEGA ERP – Cloud Senior ➜ Skyone",
   "cliente": "CMO Construtora",
   "dataVirada": "Segunda-feira, 26/10/2026",
-  "atualizadoEm": "2026-10-23T14:53:40-03:00",
+  "atualizadoEm": "2026-10-23T14:53:44-03:00",
   "frentes": [
     {
       "id": "passo-a-passo",
@@ -205,11 +205,6 @@
         {
           "id": "mo3",
           "texto": "Validar a integração após a virada",
-          "feito": false
-        },
-        {
-          "id": "jbwc453",
-          "texto": "ITEM DE TESTE",
           "feito": false
         }
       ]
