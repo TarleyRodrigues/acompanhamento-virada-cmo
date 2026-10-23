@@ -2,7 +2,7 @@
   "titulo": "Migração MEGA ERP – Cloud Senior ➜ Skyone",
   "cliente": "CMO Construtora",
   "dataVirada": "Segunda-feira, 26/10/2026",
-  "atualizadoEm": "2026-10-23T14:00:00-03:00",
+  "atualizadoEm": "2026-10-23T14:53:40-03:00",
   "frentes": [
     {
       "id": "passo-a-passo",
@@ -12,9 +12,21 @@
       "status": "feito",
       "descricao": "Guia de acesso ao novo ambiente para os usuários da CMO.",
       "itens": [
-        { "id": "pp1", "texto": "Criar o guia de acesso em PDF", "feito": true },
-        { "id": "pp2", "texto": "Publicar o artigo no portal de atendimento Synthexa", "feito": true },
-        { "id": "pp3", "texto": "Enviar o guia à CMO para o comunicado aos usuários", "feito": true }
+        {
+          "id": "pp1",
+          "texto": "Criar o guia de acesso em PDF",
+          "feito": true
+        },
+        {
+          "id": "pp2",
+          "texto": "Publicar o artigo no portal de atendimento Synthexa",
+          "feito": true
+        },
+        {
+          "id": "pp3",
+          "texto": "Enviar o guia à CMO para o comunicado aos usuários",
+          "feito": true
+        }
       ]
     },
     {
@@ -25,12 +37,36 @@
       "status": "andamento",
       "descricao": "Ambiente novo do AutoSky, MEGA ERP e servidor de integração (APP 03).",
       "itens": [
-        { "id": "sk1", "texto": "Liberar no firewall o acesso da equipe Senior ao servidor de integração", "feito": false },
-        { "id": "sk2", "texto": "Liberar o acesso da equipe Synthexa a partir da rede da CMO", "feito": false },
-        { "id": "sk3", "texto": "Enviar os dados de acesso do servidor de integração para a Senior", "feito": false },
-        { "id": "sk4", "texto": "Informar o IP de saída do novo ambiente para os parceiros de integração", "feito": false },
-        { "id": "sk5", "texto": "Importar o certificado SSL *.cmo.com.br no Load Balancer", "feito": false },
-        { "id": "sk6", "texto": "Definir o contato de plantão para a segunda-feira", "feito": false }
+        {
+          "id": "sk1",
+          "texto": "Liberar no firewall o acesso da equipe Senior ao servidor de integração",
+          "feito": false
+        },
+        {
+          "id": "sk2",
+          "texto": "Liberar o acesso da equipe Synthexa a partir da rede da CMO",
+          "feito": false
+        },
+        {
+          "id": "sk3",
+          "texto": "Enviar os dados de acesso do servidor de integração para a Senior",
+          "feito": false
+        },
+        {
+          "id": "sk4",
+          "texto": "Informar o IP de saída do novo ambiente para os parceiros de integração",
+          "feito": false
+        },
+        {
+          "id": "sk5",
+          "texto": "Importar o certificado SSL *.cmo.com.br no Load Balancer",
+          "feito": false
+        },
+        {
+          "id": "sk6",
+          "texto": "Definir o contato de plantão para a segunda-feira",
+          "feito": false
+        }
       ]
     },
     {
@@ -41,10 +77,26 @@
       "status": "andamento",
       "descricao": "DNS, certificado SSL e rede da CMO.",
       "itens": [
-        { "id": "na1", "texto": "Criar os apontamentos de DNS (vimob, clientes e approvo.cmo.com.br)", "feito": true },
-        { "id": "na2", "texto": "Emitir o certificado SSL *.cmo.com.br", "feito": true },
-        { "id": "na3", "texto": "Informar o IP público da CMO para a liberação de acesso", "feito": false },
-        { "id": "na4", "texto": "Validar o HTTPS dos portais após a virada", "feito": false }
+        {
+          "id": "na1",
+          "texto": "Criar os apontamentos de DNS (vimob, clientes e approvo.cmo.com.br)",
+          "feito": true
+        },
+        {
+          "id": "na2",
+          "texto": "Emitir o certificado SSL *.cmo.com.br",
+          "feito": true
+        },
+        {
+          "id": "na3",
+          "texto": "Informar o IP público da CMO para a liberação de acesso",
+          "feito": false
+        },
+        {
+          "id": "na4",
+          "texto": "Validar o HTTPS dos portais após a virada",
+          "feito": false
+        }
       ]
     },
     {
@@ -55,11 +107,31 @@
       "status": "andamento",
       "descricao": "Instalação dos portais web no novo servidor de integração.",
       "itens": [
-        { "id": "se1", "texto": "Serviço aprovado", "feito": true },
-        { "id": "se2", "texto": "Instalação agendada para 26/10", "feito": true },
-        { "id": "se3", "texto": "Enviar os dados de acesso e o certificado para a Senior", "feito": false },
-        { "id": "se4", "texto": "Instalação e configuração dos portais concluídas", "feito": false },
-        { "id": "se5", "texto": "Portais validados (Vimob, Approvo e Clientes)", "feito": false }
+        {
+          "id": "se1",
+          "texto": "Serviço aprovado",
+          "feito": true
+        },
+        {
+          "id": "se2",
+          "texto": "Instalação agendada para 26/10",
+          "feito": true
+        },
+        {
+          "id": "se3",
+          "texto": "Enviar os dados de acesso e o certificado para a Senior",
+          "feito": false
+        },
+        {
+          "id": "se4",
+          "texto": "Instalação e configuração dos portais concluídas",
+          "feito": false
+        },
+        {
+          "id": "se5",
+          "texto": "Portais validados (Vimob, Approvo e Clientes)",
+          "feito": false
+        }
       ]
     },
     {
@@ -70,9 +142,21 @@
       "status": "pendente",
       "descricao": "Integração do contas a pagar com o MEGA ERP.",
       "itens": [
-        { "id": "me1", "texto": "Abrir chamado informando a migração", "feito": false },
-        { "id": "me2", "texto": "Alinhar os IPs e as configurações da integração", "feito": false },
-        { "id": "me3", "texto": "Validar a integração após a virada", "feito": false }
+        {
+          "id": "me1",
+          "texto": "Abrir chamado informando a migração",
+          "feito": false
+        },
+        {
+          "id": "me2",
+          "texto": "Alinhar os IPs e as configurações da integração",
+          "feito": false
+        },
+        {
+          "id": "me3",
+          "texto": "Validar a integração após a virada",
+          "feito": false
+        }
       ]
     },
     {
@@ -83,9 +167,21 @@
       "status": "pendente",
       "descricao": "Integração com o MEGA ERP e com o Portal de Clientes.",
       "itens": [
-        { "id": "mu1", "texto": "Abrir chamado informando a migração", "feito": false },
-        { "id": "mu2", "texto": "Alinhar os IPs e as configurações da integração", "feito": false },
-        { "id": "mu3", "texto": "Validar a sincronização de contratos e ocorrências após a virada", "feito": false }
+        {
+          "id": "mu1",
+          "texto": "Abrir chamado informando a migração",
+          "feito": false
+        },
+        {
+          "id": "mu2",
+          "texto": "Alinhar os IPs e as configurações da integração",
+          "feito": false
+        },
+        {
+          "id": "mu3",
+          "texto": "Validar a sincronização de contratos e ocorrências após a virada",
+          "feito": false
+        }
       ]
     },
     {
@@ -96,9 +192,26 @@
       "status": "pendente",
       "descricao": "Integração com o MEGA ERP.",
       "itens": [
-        { "id": "mo1", "texto": "Abrir chamado informando a migração", "feito": false },
-        { "id": "mo2", "texto": "Alinhar os IPs e as configurações da integração", "feito": false },
-        { "id": "mo3", "texto": "Validar a integração após a virada", "feito": false }
+        {
+          "id": "mo1",
+          "texto": "Abrir chamado informando a migração",
+          "feito": false
+        },
+        {
+          "id": "mo2",
+          "texto": "Alinhar os IPs e as configurações da integração",
+          "feito": false
+        },
+        {
+          "id": "mo3",
+          "texto": "Validar a integração após a virada",
+          "feito": false
+        },
+        {
+          "id": "jbwc453",
+          "texto": "ITEM DE TESTE",
+          "feito": false
+        }
       ]
     },
     {
@@ -109,9 +222,21 @@
       "status": "pendente",
       "descricao": "Reservas do CV CRM ➜ Vimob ➜ carteira de recebíveis do MEGA ERP.",
       "itens": [
-        { "id": "cv1", "texto": "Abrir chamado informando a migração", "feito": false },
-        { "id": "cv2", "texto": "Confirmar o endereço e os IPs usados pela integração com o Vimob", "feito": false },
-        { "id": "cv3", "texto": "Validar uma reserva de teste após a virada", "feito": false }
+        {
+          "id": "cv1",
+          "texto": "Abrir chamado informando a migração",
+          "feito": false
+        },
+        {
+          "id": "cv2",
+          "texto": "Confirmar o endereço e os IPs usados pela integração com o Vimob",
+          "feito": false
+        },
+        {
+          "id": "cv3",
+          "texto": "Validar uma reserva de teste após a virada",
+          "feito": false
+        }
       ]
     },
     {
@@ -122,11 +247,31 @@
       "status": "andamento",
       "descricao": "Criação dos acessos dos colaboradores no novo ambiente.",
       "itens": [
-        { "id": "us1", "texto": "Planilha de usuários recebida da CMO", "feito": true },
-        { "id": "us2", "texto": "Definir a data de criação dos usuários", "feito": false },
-        { "id": "us3", "texto": "Comunicado enviado aos colaboradores", "feito": false },
-        { "id": "us4", "texto": "Usuários criados no AutoSky", "feito": false },
-        { "id": "us5", "texto": "Teste de primeiro acesso realizado", "feito": false }
+        {
+          "id": "us1",
+          "texto": "Planilha de usuários recebida da CMO",
+          "feito": true
+        },
+        {
+          "id": "us2",
+          "texto": "Definir a data de criação dos usuários",
+          "feito": false
+        },
+        {
+          "id": "us3",
+          "texto": "Comunicado enviado aos colaboradores",
+          "feito": false
+        },
+        {
+          "id": "us4",
+          "texto": "Usuários criados no AutoSky",
+          "feito": false
+        },
+        {
+          "id": "us5",
+          "texto": "Teste de primeiro acesso realizado",
+          "feito": false
+        }
       ]
     },
     {
@@ -137,8 +282,16 @@
       "status": "pendente",
       "descricao": "Carga da base de produção no novo ambiente.",
       "itens": [
-        { "id": "bd1", "texto": "Carga da base de produção no fim de semana", "feito": false },
-        { "id": "bd2", "texto": "Validação dos dados (últimos lançamentos conferidos)", "feito": false }
+        {
+          "id": "bd1",
+          "texto": "Carga da base de produção no fim de semana",
+          "feito": false
+        },
+        {
+          "id": "bd2",
+          "texto": "Validação dos dados (últimos lançamentos conferidos)",
+          "feito": false
+        }
       ]
     },
     {
@@ -149,21 +302,65 @@
       "status": "pendente",
       "descricao": "Testes de ponta a ponta na segunda-feira.",
       "itens": [
-        { "id": "dv1", "texto": "MEGA ERP abrindo pelo AutoSky", "feito": false },
-        { "id": "dv2", "texto": "Upload e download pela pasta WebFile", "feito": false },
-        { "id": "dv3", "texto": "Impressão e exportação de PDF", "feito": false },
-        { "id": "dv4", "texto": "Portais Vimob, Approvo e Clientes com HTTPS", "feito": false },
-        { "id": "dv5", "texto": "CV CRM ➜ Vimob ➜ MEGA funcionando", "feito": false },
-        { "id": "dv6", "texto": "Portal de Clientes ↔ Multidados funcionando", "feito": false },
-        { "id": "dv7", "texto": "Approvo ↔ MEGA funcionando", "feito": false },
-        { "id": "dv8", "texto": "Metadados e Mobuss funcionando", "feito": false }
+        {
+          "id": "dv1",
+          "texto": "MEGA ERP abrindo pelo AutoSky",
+          "feito": false
+        },
+        {
+          "id": "dv2",
+          "texto": "Upload e download pela pasta WebFile",
+          "feito": false
+        },
+        {
+          "id": "dv3",
+          "texto": "Impressão e exportação de PDF",
+          "feito": false
+        },
+        {
+          "id": "dv4",
+          "texto": "Portais Vimob, Approvo e Clientes com HTTPS",
+          "feito": false
+        },
+        {
+          "id": "dv5",
+          "texto": "CV CRM ➜ Vimob ➜ MEGA funcionando",
+          "feito": false
+        },
+        {
+          "id": "dv6",
+          "texto": "Portal de Clientes ↔ Multidados funcionando",
+          "feito": false
+        },
+        {
+          "id": "dv7",
+          "texto": "Approvo ↔ MEGA funcionando",
+          "feito": false
+        },
+        {
+          "id": "dv8",
+          "texto": "Metadados e Mobuss funcionando",
+          "feito": false
+        }
       ]
     }
   ],
   "atualizacoes": [
-    { "em": "2026-10-23T11:30:00-03:00", "texto": "Guia de acesso ao AutoSky enviado à CMO e publicado no portal de atendimento." },
-    { "em": "2026-10-23T12:00:00-03:00", "texto": "DNS dos portais (vimob, clientes e approvo) validado: já aponta para o novo ambiente." },
-    { "em": "2026-10-23T12:10:00-03:00", "texto": "Certificado SSL *.cmo.com.br emitido pela Nassar TI." },
-    { "em": "2026-10-23T12:20:00-03:00", "texto": "Instalação dos portais pela Senior aprovada e agendada para 26/10." }
+    {
+      "em": "2026-10-23T11:30:00-03:00",
+      "texto": "Guia de acesso ao AutoSky enviado à CMO e publicado no portal de atendimento."
+    },
+    {
+      "em": "2026-10-23T12:00:00-03:00",
+      "texto": "DNS dos portais (vimob, clientes e approvo) validado: já aponta para o novo ambiente."
+    },
+    {
+      "em": "2026-10-23T12:10:00-03:00",
+      "texto": "Certificado SSL *.cmo.com.br emitido pela Nassar TI."
+    },
+    {
+      "em": "2026-10-23T12:20:00-03:00",
+      "texto": "Instalação dos portais pela Senior aprovada e agendada para 26/10."
+    }
   ]
 }
